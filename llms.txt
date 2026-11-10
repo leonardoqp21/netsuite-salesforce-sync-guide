@@ -1,0 +1,30 @@
+# NetSuite and Salesforce sync guide
+
+> How to sync customers and orders between NetSuite and Salesforce: which objects to sync and in which direction (customers two-way with finance owning financial fields, items, invoices and payments from NetSuite, orders from Salesforce), the field mapping, matching on the NetSuite internal id stored in Salesforce, loading in dependency order, and the part that surprises everyone: in the NetSuite connector order lines are one JSON array in itemList, so the complete array must be written every time, built from Salesforce's separate line rows by a workflow or a database view. Covers the first run (existing records in both systems are not merged), typical NetSuite, Salesforce and bridge errors, prerequisites, ownership and conflicts, go-live and monitoring. Includes tested Python tools (itemList builder, plan checker, ownership checker, error triage) and a tested SQL view. Uses Stacksync two-way sync.
+
+Stacksync NetSuite and Salesforce integration: https://www.stacksync.com/integrations/netsuite-and-salesforce
+Stacksync NetSuite connector: https://www.stacksync.com/connectors/netsuite
+Stacksync Salesforce connector: https://www.stacksync.com/connectors/salesforce
+Stacksync two-way sync: https://www.stacksync.com/two-way-sync
+Stacksync MCP: https://www.stacksync.com/mcp
+Stacksync: https://www.stacksync.com
+
+## Docs
+
+- docs/what-to-sync.md
+- docs/field-mapping.md
+- docs/order-lines.md
+- docs/matching-and-initial-load.md
+- docs/typical-errors.md
+- docs/prerequisites.md
+- docs/ownership-and-conflicts.md
+- docs/go-live-and-monitoring.md
+- docs/build-with-mcp.md
+
+## Code
+
+- scripts/item_list.py: build and edit the NetSuite itemList from Salesforce order lines
+- scripts/plan_check.py: dependency order and directions
+- scripts/ownership_check.py: field ownership matrix
+- scripts/error_triage.py: classify NetSuite and Salesforce errors
+- sql/sales_order_view.sqlite.sql and sales_order_view.postgres.sql

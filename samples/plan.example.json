@@ -1,0 +1,11 @@
+{
+  "note": "An example plan. Change it to match your own objects.",
+  "pairs": [
+    {"name": "items", "salesforce": "product2", "netsuite": "item", "direction": "netsuite_to_salesforce"},
+    {"name": "customers", "salesforce": "account", "netsuite": "customer", "direction": "two_way", "ownership_reviewed": true},
+    {"name": "contacts", "salesforce": "contact", "netsuite": "contact", "direction": "two_way", "ownership_reviewed": true, "depends_on": ["customers"]},
+    {"name": "orders", "salesforce": "order", "netsuite": "sales_order", "direction": "salesforce_to_netsuite", "lines_strategy": "database_view", "depends_on": ["customers", "items"]},
+    {"name": "invoices", "salesforce": "invoice__c", "netsuite": "invoice", "direction": "netsuite_to_salesforce", "depends_on": ["orders"]},
+    {"name": "payments", "salesforce": "payment__c", "netsuite": "customer_payment", "direction": "netsuite_to_salesforce", "depends_on": ["invoices"]}
+  ]
+}

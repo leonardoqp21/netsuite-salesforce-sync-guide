@@ -1,0 +1,13 @@
+INVALID_KEY_OR_REF: Invalid item reference key 99999 for entity sales order
+INVALID_KEY_OR_REF: Invalid item reference key 88888 for entity sales order
+SSS_REQUEST_LIMIT_EXCEEDED: Request limit exceeded
+Please enter value(s) for: Terms
+You cannot create a transaction in a closed posting period
+INSUFFICIENT_PERMISSION: You do not have permission to access this record
+RCRD_HAS_BEEN_CHANGED: Record has been changed
+REQUEST_LIMIT_EXCEEDED: TotalRequests Limit exceeded.
+UNABLE_TO_LOCK_ROW: unable to obtain exclusive access to this record
+FIELD_CUSTOM_VALIDATION_EXCEPTION: Close date cannot be in the past
+INVALID_OR_NULL_FOR_RESTRICTED_PICKLIST: Status: bad value for restricted picklist field
+itemList is invalid
+something nobody has seen

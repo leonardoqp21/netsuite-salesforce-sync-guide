@@ -1,0 +1,116 @@
+{
+  "note": "An example field ownership matrix for a NetSuite and Salesforce sync. Change it to match how YOUR teams work.",
+  "fields": [
+    {
+      "object": "customer",
+      "netsuite": "internalId",
+      "salesforce": "NetSuite_Internal_ID__c",
+      "match_key": true,
+      "owner": "netsuite",
+      "direction": "netsuite_to_salesforce",
+      "reason": "The ERP assigns the internal id. Salesforce stores it so records stay matched"
+    },
+    {
+      "object": "customer",
+      "netsuite": "externalId",
+      "salesforce": "Id",
+      "owner": "salesforce",
+      "direction": "salesforce_to_netsuite",
+      "reason": "The Salesforce id is stored on the NetSuite customer, so either side can find the other"
+    },
+    {
+      "object": "customer",
+      "netsuite": "companyName",
+      "salesforce": "Name",
+      "owner": "netsuite",
+      "direction": "netsuite_to_salesforce",
+      "reason": "Finance owns the legal name once the customer exists"
+    },
+    {
+      "object": "customer",
+      "netsuite": "phone",
+      "salesforce": "Phone",
+      "owner": "salesforce",
+      "direction": "salesforce_to_netsuite",
+      "reason": "Sales keeps contact details current"
+    },
+    {
+      "object": "customer",
+      "netsuite": "email",
+      "salesforce": "Billing_Email__c",
+      "owner": "both",
+      "direction": "two_way",
+      "reason": "Sales and finance both correct the billing email",
+      "conflict_plan": "Tested a same-minute edit in a sandbox. Finance wins on disagreement, reviewed weekly"
+    },
+    {
+      "object": "customer",
+      "netsuite": "terms",
+      "salesforce": "Payment_Terms__c",
+      "owner": "netsuite",
+      "direction": "netsuite_to_salesforce",
+      "picklist": true,
+      "value_map": {
+        "Net 30": "Net 30",
+        "Net 45": "Net 45",
+        "Due on receipt": "Due on receipt"
+      },
+      "reason": "Finance sets payment terms"
+    },
+    {
+      "object": "customer",
+      "netsuite": "creditLimit",
+      "salesforce": "Credit_Limit__c",
+      "owner": "netsuite",
+      "direction": "netsuite_to_salesforce",
+      "reason": "Finance owns credit. Sales only sees it"
+    },
+    {
+      "object": "customer",
+      "netsuite": "salesRep",
+      "salesforce": "OwnerId",
+      "owner": "salesforce",
+      "direction": "salesforce_to_netsuite",
+      "owner_mapping": "owner_map.csv",
+      "reason": "Sales assigns owners. Ids differ in each system, so a mapping table is required"
+    },
+    {
+      "object": "sales_order",
+      "netsuite": "externalId",
+      "salesforce": "Id",
+      "match_key": true,
+      "owner": "salesforce",
+      "direction": "salesforce_to_netsuite",
+      "reason": "Orders start in Salesforce. The Salesforce id is the match key"
+    },
+    {
+      "object": "sales_order",
+      "netsuite": "otherRefNum",
+      "salesforce": "PoNumber",
+      "owner": "salesforce",
+      "direction": "salesforce_to_netsuite",
+      "reason": "The customer's purchase order number"
+    },
+    {
+      "object": "sales_order",
+      "netsuite": "itemList",
+      "salesforce": "OrderItems",
+      "owner": "salesforce",
+      "direction": "salesforce_to_netsuite",
+      "reason": "Lines live inside the transaction. Send the complete array"
+    },
+    {
+      "object": "sales_order",
+      "netsuite": "status",
+      "salesforce": "Fulfillment_Status__c",
+      "owner": "netsuite",
+      "direction": "netsuite_to_salesforce",
+      "picklist": true,
+      "value_map": {
+        "Pending Fulfillment": "Processing",
+        "Billed": "Completed"
+      },
+      "reason": "Operations and finance move the order forward in NetSuite"
+    }
+  ]
+}
